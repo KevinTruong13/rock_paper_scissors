@@ -48,13 +48,18 @@ function evaluateRockPaperScissors(playerInput, opponentInput) {
     if (playerInput == opponentInput) {
         return 'Tie! Nobody wins';
     } else if (playerInput == ROCK && opponentInput == SCISSORS || playerInput == PAPER && opponentInput == ROCK || playerInput == SCISSORS && opponentInput == PAPER) {
-        return `You win! ${playerInput} beats ${opponentInput}`;
+        return `You win! ${capitalize(playerInput)} beats ${capitalize(opponentInput)}`;
     } else {
-        return `You lose! ${opponentInput} beats ${playerInput}`;
+        return `You lose! ${capitalize(opponentInput)} beats ${capitalize(playerInput)}`;
     }
 }
 
 // Function determines if inputs are valid Rock Paper Scissors values
 function checkRockPaperScissors(input) {
     return input == ROCK || input == PAPER || input == SCISSORS;
+}
+
+// Function capitalizes first letter of string
+function capitalize(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
 }
