@@ -1,6 +1,6 @@
-const ROCK = 'ROCK';
-const PAPER = 'PAPER';
-const SCISSORS = 'SCISSORS';
+const ROCK = 'rock';
+const PAPER = 'paper';
+const SCISSORS = 'scissors';
 
 // Simulates a computer player that picks randomly between 'Rock', 'Paper', 'Scissors'
 function computerPlay() {
@@ -30,14 +30,15 @@ function randInt(min, max) {
 
 // Function stimulates a round of Rock Papers Scissors given player and opponent inputs
 function playRound(playerInput, opponentInput) {
+    // If inputs are strings, convert into desired case
+    if (typeof playerInput == 'string' && typeof opponentInput == 'string')
+        playerInput = playerInput.toLowerCase();
+        opponentInput = opponentInput.toLowerCase();
+    
     // Return sentinel value if inputs are not valid
     if (!(checkRockPaperScissors(playerInput) && checkRockPaperScissors(opponentInput))) {
         return "Error; Invalid inputs"
     }
-    
-    // Ensures inputs are in the intended case
-    playerInput = playerInput.toUpperCase();
-    opponentInput = opponentInput.toUpperCase();
 
     return evaluateRockPaperScissors(playerInput, opponentInput);
 }
@@ -51,4 +52,9 @@ function evaluateRockPaperScissors(playerInput, opponentInput) {
     } else {
         return `You lose! ${opponentInput} beats ${playerInput}`;
     }
+}
+
+// Function determines if inputs are valid Rock Paper Scissors values
+function checkRockPaperScissors(input) {
+    return input == ROCK || input == PAPER || input == SCISSORS;
 }
