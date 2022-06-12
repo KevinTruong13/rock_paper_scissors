@@ -35,7 +35,15 @@ function playRound(playerInput, opponentInput) {
         return "Error; Invalid inputs"
     }
     
+    // Ensures inputs are in the intended case
+    playerInput = playerInput.toUpperCase();
+    opponentInput = opponentInput.toUpperCase();
 
+    return evaluateRockPaperScissors(playerInput, opponentInput);
+}
+
+// Function evaluates winner in rock paper scissors outcome
+function evaluateRockPaperScissors(playerInput, opponentInput) {
     if (playerInput == opponentInput) {
         return 'Tie! Nobody wins';
     } else if (playerInput == ROCK && opponentInput == SCISSORS || playerInput == PAPER && opponentInput == ROCK || playerInput == SCISSORS && opponentInput == PAPER) {
