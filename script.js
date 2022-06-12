@@ -63,3 +63,12 @@ function checkRockPaperScissors(input) {
 function capitalize(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
 }
+
+// Function stimulates a full game of Rock Paper Scissors. Accepts the number of rounds as a parameter.
+function game(endRound = '5') {
+    for (let round = 1; round <= endRound; round++) {
+        userInput = prompt("Rock, Paper, or Scissors?");
+
+        console.log(playRound(userInput, computerPlay()));
+    }
+}
