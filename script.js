@@ -31,15 +31,14 @@ function randInt(min, max) {
 // Function stimulates a round of Rock Papers Scissors given player and opponent inputs
 function playRound(playerInput, opponentInput) {
     // If inputs are strings, convert into desired case
-    if (typeof playerInput == 'string' && typeof opponentInput == 'string')
+    if (typeof playerInput == 'string' && typeof opponentInput == 'string') {
         playerInput = playerInput.toLowerCase();
         opponentInput = opponentInput.toLowerCase();
-    
+    }
     // Return sentinel value if inputs are not valid
     if (!(checkRockPaperScissors(playerInput) && checkRockPaperScissors(opponentInput))) {
         return "Error; Invalid inputs"
     }
-
     return evaluateRockPaperScissors(playerInput, opponentInput);
 }
 
@@ -68,7 +67,6 @@ function capitalize(str) {
 function game(endRound = '5') {
     for (let round = 1; round <= endRound; round++) {
         userInput = prompt("Rock, Paper, or Scissors?");
-
         console.log(playRound(userInput, computerPlay()));
     }
 }
