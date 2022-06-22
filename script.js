@@ -1,6 +1,9 @@
 const ROCK = 'rock';
 const PAPER = 'paper';
 const SCISSORS = 'scissors';
+const WIN = 1;
+const LOSS = -1;
+const TIE = 0;
 
 // Simulates a computer player that picks randomly between 'Rock', 'Paper', 'Scissors'
 function computerPlay() {
@@ -63,9 +66,20 @@ function capitalize(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
-// Function displays results of a button press
+// Function displays results of a button selection
 function displayResults(e) {
-    console.log(this.getAttribute('id'));
+    // Passing corresponding RPS value of button and a computer generated value
+    const result = playRound(this.getAttribute('id'), computerPlay());
+    document.querySelector('#result').textContent = result;
+    if (result.includes('win')) updateScores(WIN);
+    else if (result.includes('lose')) updateScores(LOSS);
+    else if (result.includes('tie')) updateScores(TIE);
+    else console.log('Error, invalid playRound return value');
+}
+
+// Function updates running scores. Accepts win status of player one as a boolean.
+function updateScores(win) {
+    
 }
 
 const buttons = document.querySelectorAll('button');
