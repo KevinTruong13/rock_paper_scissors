@@ -4,6 +4,7 @@ const SCISSORS = 'scissors';
 const WIN = 1;
 const LOSS = -1;
 const TIE = 0;
+const MAX_ROUNDS = 5;     // Max rounds in a gamme
 
 // Simulates a computer player that picks randomly between 'Rock', 'Paper', 'Scissors'
 function computerPlay() {
@@ -71,14 +72,35 @@ function displayResults(e) {
     // Passing corresponding RPS value of button and a computer generated value
     const result = playRound(this.getAttribute('id'), computerPlay());
     document.querySelector('#result').textContent = result;
+
     if (result.includes('win')) updateScores(WIN);
     else if (result.includes('lose')) updateScores(LOSS);
     else if (result.includes('tie')) updateScores(TIE);
     else console.log('Error, invalid playRound return value');
 }
 
-// Function updates running scores. Accepts win status of player one as a boolean.
-function updateScores(win) {
+// Function updates running scores. Accepts win status of player one as paramete. Positive indicates a win, negative indicates loss, 0 indicates tie.
+function updateScores(winStatus) {
+    const player1Score = document.querySelector('#player-1-score');
+    const player2Score = document.querySelector('#player-2-score');
+    const endOfGame = document.querySelector('#end-of-game');
+    
+    if (player1Score.textContent >= MAX_ROUNDS || player2Score.textContent >= MAX_ROUNDS) {
+        endOfGame.textContent = '';
+        player1Score.textContent = player2Score.textContent = 0;
+    }
+
+    if (winStatus > 0) {
+        player1Score.textContent = +player1Score.textContent + 1;
+    } else if (winStatus < 0) {
+        player2Score.textContent = +player2Score.textContent + 1;
+    }
+
+    if (player1Score.textContent >= MAX_ROUNDS) {
+        endOfGame.textContent = 'Player one has won the game!';
+    } else if (player2Score.textContent >= MAX_ROUNDS) {
+        endOfGame.textContent = 'Player two has won the game!';
+    }
     
 }
 
